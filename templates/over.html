@@ -1,0 +1,125 @@
+{%extends './layouts/main.html'%}
+
+{%block content%}
+<div id="app">
+    <div id="over" class="container mb-5">
+        <h1>[[title]]</h1>
+        <p class="lead">Wij kunnen hier een mooie applicatie neerzetten</p>
+        <div class="row">
+            <div class="col-12 g-0 mb-3 p-1">
+                <!-- Met dit formulier kunnenn we nieuwe todos aanmaken  -->
+                <form @submit.prevent="onSubmit" class="input-group">
+                    <input type="text" name="new_todo" v-model='new_todo' class="form-control"
+                        placeholder="Maak een nieuwe todo">
+                    <input type="submit" value="Versturen" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+        <div class="row todo-bar">
+            <div class="col-md-3 g-2 p-1" v-for="(todo,index) in todos" ::key="todo.id">
+                <!-- We kunnen hier de kaarten laten zien  -->
+                <div class="card" :class="{completed:todo.completed}">
+                    <div class="card-body">
+                        <p class="cus-header" @click="set_completed(todo)">
+                            [[todo.title]]
+                        </p>
+                        <div class="row-col">
+                            <div class="">
+                                <small class="">[[todo.date_created]]</small>
+                            </div>
+                            <div class="me-auto">
+                                <!-- De buttons voor het verwijderen en aanpassen  -->
+                                <span class="btn btn-sm btn-primary me-2 text-center rounded-pill"
+                                    @click="delete_todo(todos,todo)">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                                <span class="btn btn-sm btn-primary text-center rounded-pill"
+                                    @click="setCompleted(todo)">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%include './partials/footer.html'%}
+</div>
+{%endblock%}
+{%block scripting%}
+
+<script>
+    const { createApp } = Vue
+    createApp({
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                title: 'Over Ons',
+                todos: [],
+                new_todo: null,
+            }
+        },
+        methods: {
+            // Hiermee zetten we de todo als completed 
+            set_completed: (todo) => {
+                todo.completed = !todo.completed
+                axios.patch(`http://localhost:5000/api/todo/${todo.id}`)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                return todo
+            },
+            async all_todos() {
+                //Alle todos worden hier opgehaald 
+                await axios.get('http://localhost:5000/api/todos')
+                    .then(response => response.data)
+                    .then(data => {
+                        this.todos = data
+                    });
+            },
+            async delete_todo(todos, todo) {
+                //Verwijderern van todos
+                await axios.delete(`http://localhost:5000/api/todo/${todo.id}`)
+                this.all_todos()
+                console.log('delete clicked' + todo.id)
+            },
+            onSubmit: async function (e) {
+                /* Toeveogen van nieuwe tasks */
+                sendData = this.new_todo
+                await axios.post('http://localhost:5000/api/todo', sendData)
+                    .then(response => response.data)
+                    .then(data => console.log(data))
+                this.all_todos()
+                this.new_todo = ''
+            },
+        },
+        mounted() {
+            //We mounten de app en tonen het 
+            this.all_todos()
+        },
+    }).mount('#app')
+</script>
+<style scoped>
+    .completed {
+        color: #eee;
+        background-color: rgb(246, 13, 13);
+    }
+
+    .completed .cus-header {
+        color: #eee;
+    }
+
+    .completed small {
+        color: white;
+    }
+
+    .todo-bar {
+        min-height: 15rem;
+        padding: .2rem;
+        border: solid #bbb .1045pt;
+        border-style: inset;
+        border-radius: .63rem;
+    }
+</style>
+{%endblock%}

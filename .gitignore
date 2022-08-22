@@ -1,0 +1,5 @@
+db.sqlite
+/temp
+/.venv
+/assets/scss
+/__pycache__

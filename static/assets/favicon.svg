@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Converted with SVG Converter - Version 0.9.6 (Compiled Thu Aug 31 10:01:05 2017) - Copyright (C) 2011 Nokia -->
+
+<svg
+   preserveAspectRatio="xMidYMid meet"
+   height="512.000000pt"
+   viewBox="0 0 510.000000 512.000000"
+   version="1.0"
+   width="510.000000pt"
+   id="svg12"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="0.10196078"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="pt"
+     showgrid="false"
+     inkscape:zoom="1.1147461"
+     inkscape:cx="-15.698642"
+     inkscape:cy="197.80289"
+     inkscape:window-width="1920"
+     inkscape:window-height="1003"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10"
+     inkscape:showpageshadow="false"
+     showborder="false" />
+  <g
+     stroke="none"
+     fill="rgb(25, 135, 84)"
+     transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+     id="g10">
+    <path
+       d="M2430 5019 c0 -6 31 -45 68 -87 248 -277 411 -648 521 -1182 80 -389
+101 -635 101 -1163 0 -456 -5 -528 -60 -957 -82 -630 -255 -1075 -574 -1484
+-57 -74 -58 -86 -7 -86 22 0 43 -4 46 -10 8 -13 189 -13 327 0 257 25 603 123
+839 240 154 76 187 102 221 179 17 36 45 91 64 121 51 83 71 154 98 343 l24
+172 5 1347 c2 741 0 1371 -4 1400 -5 29 -13 119 -19 200 -6 81 -19 182 -30
+225 -20 81 -144 337 -184 382 -27 30 -177 118 -281 166 -293 133 -649 205
+-1022 205 -89 0 -133 -4 -133 -11z"
+       id="path2"
+       style="fill:#800080" />
+    <path
+       d="M1329 4451 c-51 -16 -71 -34 -92 -79 l-22 -47 -3 -1740 c-2 -1272 0
+-1758 8 -1807 7 -41 24 -87 43 -120 27 -45 43 -58 102 -88 61 -30 79 -34 142
+-34 264 2 439 305 517 894 45 336 54 506 49 1000 -4 496 -16 681 -64 1015 -57
+394 -149 676 -273 833 -25 31 -60 69 -79 83 -95 76 -241 116 -328 90z"
+       id="path4"
+       style="fill:#800080" />
+    <path
+       d="M4890 2545 c0 -659 2 -805 13 -805 7 0 21 25 31 56 12 37 21 52 26
+44 16 -26 69 184 91 365 16 128 16 470 0 600 -27 219 -115 545 -147 545 -12 0
+-14 -127 -14 -805z"
+       id="path6"
+       style="fill:#800080" />
+    <path
+       d="M176 3173 c-58 -240 -77 -377 -83 -588 -4 -147 -2 -216 11 -305 19
+-127 73 -401 87 -438 14 -37 29 -16 29 43 0 29 4 55 9 57 13 4 25 936 16 1181
+-9 249 -19 256 -69 50z"
+       id="path8"
+       style="fill:#800080" />
+  </g>
+</svg>

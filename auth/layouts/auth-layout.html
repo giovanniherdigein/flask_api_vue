@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="https://use.fontawesome.com/dffcb7a970.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <title>::Auth</title>
+</head>
+
+<body>
+    {%macro render_breadcrumb(title) -%}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{caller()}}</li>
+        </ol>
+    </nav>
+    {%- endmacro%}
+    <!-- INJECTION -->
+    {%block content%}{%endblock%}
+    {%block scripting%}{%endblock%}
+    <!-- END INJECTION -->
+</body>
+
+</html>

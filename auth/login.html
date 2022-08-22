@@ -1,0 +1,41 @@
+{%extends './layouts/auth-layout.html'%}
+
+{%block content%}
+<div class="container">
+    {%call render_breadcrumb()%}Login{%endcall%}
+    <div class="mt-5 pt-5"></div>
+    <main class="form-signin w-100 m-auto">
+        <div class="auth-header">
+            <img src="/static/assets/favicon.svg" alt="" class="img-fluid mb-5">
+            <h2>Login</h2>
+
+        </div>
+        <form action="/login" method="post">
+            <legend class="text-center">
+                <p>U kunt hier inloggen</p>
+            </legend>
+            {%include 'partials/flash_message.html'%}
+            <div class="form-floating">
+                <input type="email" class="form-control border-info" name="email" id="floatingInput"
+                    placeholder="Email">
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control border-info" name="password" id="floatingPassword"
+                    placeholder="Wachtwoord">
+                <label for="floatingPassword">Wachtwoord</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Instellingen vastleggen
+                </label>
+            </div>
+            <button class="w-50 btn btn-lg btn-outline-secondary border-info" type="submit"><i class="fa fa-key"></i>
+                Log in</button>
+        </form>
+    </main>
+</div>
+<div class="mt-5 pt-5"></div>
+{%include './layouts/partials/footer.html'%}
+{%endblock%}

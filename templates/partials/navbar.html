@@ -1,0 +1,65 @@
+<nav class="navbar navbar-dark bg-dark text-white fixed-top">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#">
+            <img class="img-fluid" src="./../static/assets/favicon.svg" width="32" height="32" alt=""> Penderosa
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end bg-black " tabindex="-1" id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+
+                <h5 class="offcanvas-title text-cus-anti-color" id="offcanvasDarkNavbarLabel">
+                    <img src="/static/assets/favicon_anti.svg" width="24px" height="24px" alt=""> Penderosa
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-users"></i> Voor Werkgevers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-life-ring"></i> Voor Freelancers</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/over"><i class="fa fa-life-ring"></i> Over Ons</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Meer <i class="fa fa-chervron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/over"><i class="fa fa-linode"></i> Over Ons</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-balance-scale"></i> Balans</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-superpowers"></i> Werken bij
+                                    Penderosa</a></li>
+                        </ul>
+                    </li>
+                    <div class="my-3 "><a href="{{url_for('auth.aanmelden')}}"
+                            class="btn btn-sm btn-primary rounded-pill">
+                            <i class="fa fa-user"></i> Registreren</a> |
+                        <a href="{{url_for('auth.login')}}" class="btn btn-sm btn-danger rounded-pill">
+                            <i class="fa fa-lock"></i> Inloggen
+                        </a>
+                    </div>
+                    <div class="justify-content-between sm-text d-none  d-lg-flex">
+                        <div class="inline"><a href="{{url_for('auth.login')}}">
+                                Wachwoord of Login kwijt
+                            </a></div>
+                        <div class="inline">
+                            <a href="#">Werkgevers inloggen</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</nav>

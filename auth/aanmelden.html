@@ -1,0 +1,47 @@
+{%extends './layouts/auth-layout.html'%}
+
+{%block content%}
+<div class="container">
+    {%call render_breadcrumb()%}
+    Registeren
+    {%endcall%}
+    <div class="auth-form">
+        <div class="auth-header">
+            <img src="/static/assets/favicon.svg" alt="" class="img-fluid mb-5">
+            <h2>Registeren</h2>
+        </div>
+        <form action="/aanmelden" method="post">
+            <legend class="text-center">
+                <p class="text-muted">Registratie voor zelfstandigen en freelancers</p>
+            </legend>
+            {%include 'partials/flash_message.html'%}
+            <div class="form-signin col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-span">
+                        <i class="fa fa-user"></i>
+                    </span> <input class="form-control form-floating" type="text" name="username"
+                        placeholder="username">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-span">
+                        <i class="fa fa-envelope"></i>
+                    </span> <input class="form-control" type="email" id="my-email" name="email" placeholder="email">
+                </div>
+                <div class="input-group form-flaoting mb-3">
+                    <span class="input-span">
+                        <i class=" fa fa-lock"></i>
+                    </span> <input type="password" class="form-control" name="password" placeholder="password">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-span">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    <input class="form-control" type="password" name="repeat-password" placeholder="repeat-password">
+                </div>
+                <input type="submit" name="" value="Submit" class="btn btn-primary ">
+            </div>
+        </form>
+    </div>
+</div>
+{%include './layouts/partials/footer.html'%}
+{%endblock%}

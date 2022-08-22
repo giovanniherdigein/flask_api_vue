@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<!-- HEAD -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <script src="https://use.fontawesome.com/dffcb7a970.js"></script>
+    <!-- INJECTED STYLES -->
+    {%block styling%}{%endblock%}
+    <title>Flask With Vue</title>
+</head>
+<!-- ENDHAED -->
+<!-- BODY -->
+
+<body>
+    {%include 'partials/navbar.html'%}
+    <div class="mt-5 pt-5"></div>
+    {%block content%}{%endblock%}
+    <script src="{{url_for('static',filename='js/bootstrap.bundle.js')}}"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- INJECTED SCRIPTS -->
+    {%block scripting%}{%endblock%}
+</body>
+<!-- ENDBODY -->
+
+</html>

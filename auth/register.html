@@ -1,0 +1,91 @@
+{%extends './layouts/auth-layout.html'%}
+
+{%block content%}
+<div class="container">
+    {%call render_breadcrumb()%}
+    Registeren
+    {%endcall%}
+    <div class="auth-form">
+        <div class="auth-header">
+            <img src="/static/assets/favicon.svg" alt="" class="img-fluid mb-5">
+            <h2>Registeren</h2>
+
+        </div>
+
+        <form action="" method="post">
+            <legend class="text-center">
+                <p class="text-muted">Registratie voor zelfstandigen en freelancers</p>
+            </legend>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <p>Aanhef</p>
+                            <input class="form-check-input" type="radio" name="geslacht" id="exampleRadios1" value="man"
+                                checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Dhr
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="geslacht" id="exampleRadios2"
+                                value="vrouw">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Mevr
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        <input type="text" name="naam" placeholder="Naam" class="form-control border-1 border-info">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="voornaam" placeholder="Voornaam"
+                            class="form-control border-1 border-info">
+                    </div>
+                    <div class="row-col">
+                        <textarea name="ervaring" placeholder="Korte motivatie / ervaring " cols="30" rows="10"
+                            class="form-control border-1 border-info"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row-col pb-2 mb-3 border-bottom border-1">
+                <p>In welke hoedanigheid wenst u te werk te gaan</p>
+                <div class="form-check">
+                    <input type="radio" name="werknemer" id="zelfstandige-werknemer" class="form-check-input"
+                        value="zelfstandige" checked>
+                    <label for="zelfstandige-werknemer">Zelfstandige</label>
+                </div>
+                <div class=" form-check">
+                    <input type="radio" name="werknemer" id="freelance-werknemer" class="form-check-input"
+                        value="freelancer">
+                    <label for="freelance-werknemer">Freelancer</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-7 me-auto">
+                    <label for="file-upload" class="mb-3">Upload hier uw CV</label>
+                    <input type="file" id="file-upload" class="form-control border-info input-group-prepend" required>
+                    <div class="invalid-feedback">Bestand type niet toegestaan</div>
+                </div>
+                <div class="row-col">
+                    <div class=" form-check form-switch">
+                        <input id="voordwaarde" type="checkbox" role="switch" class="form-check-input">
+                        <label for="voorwaarde">U bent op de hoogte en gaat akkoord met de gebruiks voorwaarden</label>
+                    </div>
+                </div>
+                <div class="row-col mt-3">
+                    <button type="button" class="btn btn-lg btn-outline-secondary border-info"><i
+                            class="fa fa-envelope"></i>
+                        Verzenden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{%include './layouts/partials/footer.html'%}
+
+{%endblock%}
