@@ -9,7 +9,8 @@
                 freelancers.
                 <img class="img-fluid" src="./../static/assets/teammeeting.svg" alt="">
             </p>
-            <a href="{{url_for('auth.login')}}" class="rounded-pill btn btn-lg btn-outline-primary header-btn"> Schrijf
+            <a href="{{url_for('auth.aanmelden')}}" class="rounded-pill btn btn-lg btn-outline-primary header-btn">
+                Schrijf
                 je
                 direct in <span class="btn-bull"><i class="fa fa-chevron-right"></i></span></a>
         </div>
@@ -178,6 +179,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        {{name}}
     </div>
     {%include './partials/footer.html'%}
 </div>

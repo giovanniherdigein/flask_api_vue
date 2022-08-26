@@ -3,3 +3,4 @@ db.sqlite
 /.venv
 /assets/scss
 /__pycache__
+mail_config.cfg

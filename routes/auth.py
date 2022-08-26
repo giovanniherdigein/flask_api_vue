@@ -1,12 +1,14 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_mail import Mail, Message
 from models import User, db
 
 auth = Blueprint('auth', __name__,
                  template_folder='../auth')
 
 login_manager = LoginManager()
+mail = Mail()
 
 
 @auth.route('/auth', methods=['GET'])
@@ -20,8 +22,11 @@ def login():
         _email = request.form.get('email')
         user = User.query.filter_by(email=_email).first()
         check_password_hash(user.password, request.form.get('password'))
-        print(user)
         login_user(user)
+        msg = Message("Login info",
+                      sender="noreply@localhost",
+                      recipients=["giovanni.herdigein@gmail.com"])
+        mail.send(msg)
         flash("Hallo, Welcome terug")
         return redirect(url_for('root.werkgever'))
     return render_template('login.html')
@@ -61,3 +66,10 @@ def remove_account():
 @ auth.route('/update-account', methods=['GET', 'POST'])
 def update_account():
     return "Update account"
+
+
+@auth.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('root.index'))

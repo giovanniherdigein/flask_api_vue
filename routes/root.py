@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, make_response, request
 from flask_login import login_required, current_user
 root = Blueprint('root', __name__,
                  template_folder='templates')
@@ -8,7 +8,9 @@ root = Blueprint('root', __name__,
 @root.route('/', methods=['GET'])
 # @login_required
 def index():
-    return render_template('index.html')
+    cookie_name = request.cookies.get('User_Name')
+    resp = make_response(render_template('index.html', name=cookie_name))
+    return resp
 
 
 @root.route('/over', methods=['GET'])
@@ -24,4 +26,6 @@ def services():
 @root.route('/werkgever')
 @login_required
 def werkgever():
-    return 'Werkgever %s ingelogt' % current_user.username
+    resp = make_response(render_template('werkgever.html'))
+    resp.set_cookie("User_Name", current_user.username, 30)
+    return resp
