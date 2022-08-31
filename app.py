@@ -7,15 +7,17 @@ from routes.root import root as root_blueprint
 from routes.auth import auth as auth_blueprint
 from routes.api import api as api_blueprint
 from routes.auth import login_manager, current_user, mail
+from dotenv import load_dotenv
 from models import *
-
+from os import environ
 # building the app
 app = Flask(__name__)
+load_dotenv('./.env')
 # configuration files
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_vue_api.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = 'secret'
+app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config.from_pyfile('mail_config.cfg')
 # creating the database app, origins=[“http://localhost:8000”, “https://example.com”])
 # db = SQLAlchemy()

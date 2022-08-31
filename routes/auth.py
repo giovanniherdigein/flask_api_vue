@@ -1,8 +1,10 @@
+from itsdangerous import URLSafeTimedSerializer
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_mail import Mail, Message
 from models import User, db
+from os import environ
 
 auth = Blueprint('auth', __name__,
                  template_folder='../auth')
@@ -23,9 +25,11 @@ def login():
         user = User.query.filter_by(email=_email).first()
         check_password_hash(user.password, request.form.get('password'))
         login_user(user)
-        msg = Message("Login info",
-                      sender="noreply@localhost",
-                      recipients=["giovanni.herdigein@gmail.com"])
+        msg = Message(subject='Nieuwe mail ',
+                      sender='dutch.p.hardy@gmail.com',
+                      recipients=["Giovanni.herdigein@gmail.com"],
+                      body="Er is een niew email vestuurd aan jou"
+                      )
         mail.send(msg)
         flash("Hallo, Welcome terug")
         return redirect(url_for('root.werkgever'))
@@ -73,3 +77,19 @@ def update_account():
 def logout():
     logout_user()
     return redirect(url_for('root.index'))
+
+
+def generate_email_token(email):
+    s = URLSafeTimedSerializer(environ.get('SECRET_KEY'))
+    salt = environ.get('SECURITY_PASSWORD_SALT')
+    return s.dumps(email, salt=salt)
+
+
+def confirm_email_token(token, expiration=360):
+    s = URLSafeTimedSerializer(environ.get('SECRET_KEY'))
+    salt = environ.get('SECURITY_PASSWORD_SALT')
+    try:
+        email = s.load(token, salt=salt)
+    except:
+        return False
+    return email
