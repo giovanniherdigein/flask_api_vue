@@ -24,7 +24,7 @@ app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=2)
 # creating the database app, origins=[“http://localhost:8000”, “https://example.com”])
 # db = SQLAlchemy()
-# ma = Marshmallow()
+# ma = Marshmallow()    
 db.init_app(app)
 ma.init_app(app)
 babel = Babel(app)

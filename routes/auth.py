@@ -1,5 +1,5 @@
 from os import environ
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -40,20 +40,30 @@ def aanmelden():
     if request.method == 'POST':
         _username = request.form.get('username')
         _email = request.form.get('email')
+        if request.form.get('_password') != request.form.get('_repeat_password'):
+            flash('wachtwoorden komen niet overeen')
         _password = generate_password_hash(
             request.form.get('password'), method='sha256')
         _repeat = request.form.get('repeat_password')
         user = User(username=_username, email=_email, password=_password)
         db.session.add(user)
         db.session.commit()
-        print(user)
-        return redirect(url_for('auth.login'))
+        token = generate_email_token(_email)
+        print("The token is : {}".format(token))
+        return redirect(url_for('auth.authenticate', token=token))
     return render_template('aanmelden.html')
 
 
-@ auth.route('/authenticate', methods=['GET', 'POST'])
-def authenticate():
-    return 'authenticate your account'
+@ auth.route('/authenticate/<token>', methods=['GET', 'POST'])
+def authenticate(token):
+    return 'authenticate your account {}'.format(token)
+
+
+@auth.route('/confirm_email')
+def confirm_email():
+    token = request.args.get('token')
+    email = confirm_email_token(token)
+    return '{}'.format(email)
 
 
 @ auth.route('/change-password', methods=['GET', 'POST'])
@@ -84,14 +94,14 @@ def generate_email_token(email):
     return s.dumps(email, salt=salt)
 
 
-def confirm_email_token(token, expiration=360):
+def confirm_email_token(token, expiration=60):
     s = URLSafeTimedSerializer(environ.get('SECRET_KEY'))
     salt = environ.get('SECURITY_PASSWORD_SALT')
     try:
-        email = s.load(token, salt=salt)
-    except:
-        return False
-    return email
+        email = s.loads(token, salt=salt, max_age=expiration)
+    except SignatureExpired:
+        return "The token has expired"
+    return "Confirmed : {}".format(email)
 
 
 def add_user(user, request):

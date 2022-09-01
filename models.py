@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(128))
     email = db.Column(db.String(128), nullable=False, unique=True)
+    email_confirmed = db.Column(db.Boolean, default=False)
     password = db.Column(db.String(256), nullable=False)
     registered_on = db.Column(db.Date, default=datetime.utcnow())
     todos = db.relationship('Todo', backref='todos')
@@ -35,6 +36,20 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f"<TODO> {self.id} {self.title}"
+
+
+class Sessions(db.Model):
+    '''Sessions are stored'''
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(), unique=True, nullable=False)
+    key = db.Column(db.String(255))
+
+    def __init__(self, name, key):
+        self.name = name
+        self.key = key
+
+    def __repr__(self):
+        return f"<SESSION> {self.name} : {self.key}"
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
