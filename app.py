@@ -9,6 +9,7 @@ from routes.api import api as api_blueprint
 from routes.auth import login_manager, current_user, mail
 from dotenv import load_dotenv
 from models import *
+from datetime import timedelta
 from os import environ
 # building the app
 app = Flask(__name__)
@@ -19,6 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config.from_pyfile('mail_config.cfg')
+app.config['SESSION_PERMANENT'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=2)
 # creating the database app, origins=[“http://localhost:8000”, “https://example.com”])
 # db = SQLAlchemy()
 # ma = Marshmallow()

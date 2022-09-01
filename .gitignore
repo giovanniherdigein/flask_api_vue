@@ -4,3 +4,4 @@ db.sqlite
 /assets/scss
 /__pycache__
 mail_config.cfg
+.env

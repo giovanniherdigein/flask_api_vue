@@ -1,10 +1,12 @@
+from os import environ
 from itsdangerous import URLSafeTimedSerializer
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_mail import Mail, Message
+import uuid
 from models import User, db
-from os import environ
 
 auth = Blueprint('auth', __name__,
                  template_folder='../auth')
@@ -25,12 +27,9 @@ def login():
         user = User.query.filter_by(email=_email).first()
         check_password_hash(user.password, request.form.get('password'))
         login_user(user)
-        msg = Message(subject='Nieuwe mail ',
-                      sender='dutch.p.hardy@gmail.com',
-                      recipients=["Giovanni.herdigein@gmail.com"],
-                      body="Er is een niew email vestuurd aan jou"
-                      )
-        mail.send(msg)
+        # session['username'] = user.username
+        session['uid'] = uuid.uuid4()
+        print("%s,%s" % (user.id, session['uid']))
         flash("Hallo, Welcome terug")
         return redirect(url_for('root.werkgever'))
     return render_template('login.html')
@@ -93,3 +92,20 @@ def confirm_email_token(token, expiration=360):
     except:
         return False
     return email
+
+
+def add_user(user, request):
+    '''
+    Adding users to the _active_users_list
+    '''
+    user = user.id
+    sid = request.sid
+
+    pass
+
+
+def remove_user(user):
+    '''
+    Removing users from the active_users_list
+    '''
+    pass
