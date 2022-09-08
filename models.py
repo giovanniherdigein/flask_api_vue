@@ -60,29 +60,34 @@ class Vacature(db.Model):
 
 class Werknemer(User):
     __tablename__ = 'werknemer'
-    werknemerid = db.Column(db.String(255))
+    werknemerid = db.Column(db.String(256))
+    # vacature_list = db.Column(db.Integer, db.ForeignKey('vacature.id'))
     # vacatureid = db.Column(db.Integer, db.ForeignKey('vacature.id'))
     # vacaturid = db.relationship("Vacature", secondary=opdrachten_tabel, primaryjoin=(
     # opdrachten_tabel.c.werknemerid == 'id'), backref='opdachten_tabel', lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
-        super()
-        self.werknemerid = uuid.uuid4()
+        super().__init__(*args, **kwargs)
+        self.werknemerid = uuid.uuid4().hex
+
+    def add_to_list(self, vacatureid):
+        opdracht = opdracht(self.id, vacatureid)
 
     def __repr__(self):
-        return f'<WERKNEMER: {self.werknemerid}>'
+        return f'<WERKNEMER: {self.username} {self.werknemerid} id= {self.id}>'
 
 
 class Werkgever(User):
-    werkgeverid = db.Column(db.String(255))
+    werkgeverid = db.Column(db.String(256))
     vacatures = db.relationship('Vacature', backref='vacatures')
 
     def __init__(self, *args, **kwargs):
-        super()
-        self.werkgeverid = uuid.uuid4()
+        super().__init__(*args, **kwargs)
+
+        self.werkgeverid = uuid.uuid4().hex
 
     def __repr__(self):
-        return f'<WERKGEVER: {self.werkgever_id}>'
+        return f'<WERKGEVER:{self.username} {self.werkgeverid} id= {self.id}>'
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
