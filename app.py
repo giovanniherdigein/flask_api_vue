@@ -6,15 +6,21 @@ from routes.root import root as root_blueprint
 from routes.auth import auth as auth_blueprint
 from routes.api import api as api_blueprint
 from routes.auth import login_manager
+from dotenv import load_dotenv
+from os import environ
 from models import *
 
 # building the app
 app = Flask(__name__)
 # configuration files
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_vue_api.db'
+load_dotenv('.env')
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get(
+    "SQLALCHEMY_DATABASE_URI")  # 'sqlite:///flask_vue_api.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = 'secret'
+app.config['FLASK_SERVER_PORT'] = 8943
+# app.config['SECRET_KEY'] = environ.get("SECRET_KEY")
+app.config.from_pyfile('Flask_App.cfg')
 # creating the database app, origins=[“http://localhost:8000”, “https://example.com”])
 # db = SQLAlchemy()
 # ma = Marshmallow()
@@ -38,6 +44,19 @@ def user_loader(id):
 app.register_blueprint(root_blueprint)
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(api_blueprint)
+
+
+@app.shell_context_processor
+def make_shell_context():
+    return {
+        'db': db,
+        'User': User,
+        'Todo': Todo,
+        'Werkgever': Werkgever,
+        'Werknemer': Werknemer,
+        'Vacature': Vacature
+    }
+
 
 # starting the app
 if __name__ == '__main__':
